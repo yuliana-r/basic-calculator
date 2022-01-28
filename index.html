@@ -4,6 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/f5ed9082ee.js" crossorigin="anonymous"></script>
+    <script src="script.js" defer></script>
     <link rel="icon" href="./images/icon.png">
     <link rel="stylesheet" href="style.css">
     <title>Coun+ on me</title>
@@ -11,51 +12,49 @@
 
 <body>
     <div class="container">
+
         <p>Not all math puns are awful. Just sum!</p>
+
         <div class="calculator">
+
             <div id="display">\(•◡•)/</div>
+
             <div class="buttons">
 
                 <div class="content">
                     <button class="blue" id="clear">AC</button>
-                    <button class="blue" id="delete">DEL</button>
+                    <button class="blue" id="delete"><i class="fas fa-backspace"></i></button>
                 </div>
-                <div class="content">
-                    <button class="grey">7</button>
-                    <button class="grey">8</button>
-                    <button class="grey">9</button>
-                    <button class="blue">÷</button>
-                </div>
-
 
                 <div class="content">
-                    <button class="grey">4</button>
-                    <button class="grey">5</button>
-                    <button class="grey">6</button>
-                    <button class="blue">×</button>
+                    <button class="grey" data-key="103" data-value="7">7</button>
+                    <button class="grey" data-key="104" data-value="8">8</button>
+                    <button class="grey" data-key="105" data-value="9">9</button>
+                    <button class="blue" data-key="111">÷</button>
                 </div>
-
-
 
                 <div class="content">
-                    <button class="grey">1</button>
-                    <button class="grey">2</button>
-                    <button class="grey">3</button>
-                    <button class="blue">−</button>
+                    <button class="grey" data-key="100" data-value="4">4</button>
+                    <button class="grey" data-key="101" data-value="5">5</button>
+                    <button class="grey" data-key="102" data-value="6">6</button>
+                    <button class="blue" data-key="106">×</button>
                 </div>
-
-
 
                 <div class="content">
-                    <button class="grey">0</button>
-                    <button class="grey">.</button>
-                    <button class="red">=</button>
-                    <button class="blue">+</button>
+                    <button class="grey" data-key="97" data-value="1">1</button>
+                    <button class="grey" data-key="98" data-value="2">2</button>
+                    <button class="grey" data-key="99" data-value="3">3</button>
+                    <button class="blue" data-key="109">−</button>
                 </div>
 
+                <div class="content">
+                    <button class="grey" data-key="96" data-value="0">0</button>
+                    <button class="grey" data-key="110">.</button>
+                    <button class="red" data-key="13">=</button>
+                    <button class="blue" data-key="107">+</button>
+                </div>
             </div>
         </div>
-        
     </div>
     <a href="https://github.com/yuliana-r/basic-calculator" target="_blank"><i class="fab fa-github"></i> Github</a>
 </body>
