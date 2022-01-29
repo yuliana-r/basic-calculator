@@ -1,3 +1,8 @@
+const display = document.getElementById('display');
+const clearBtn = document.getElementById('clear');
+
+clearBtn.addEventListener('click', () => display.textContent = '0');
+
 function add(a, b) {
     return a + b;
 }
