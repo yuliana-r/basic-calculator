@@ -1,7 +1,15 @@
 const display = document.getElementById('display');
 const clearBtn = document.getElementById('clear');
+const numberBtn = document.querySelectorAll('.number');
 
-clearBtn.addEventListener('click', () => display.textContent = '0');
+clearBtn.addEventListener('click', () => display.textContent = '');
+
+
+numberBtn.forEach(button => {
+    button.addEventListener('click', () => {
+        display.textContent = (display.textContent + button.getAttribute('data-value')).substring(0,11);
+    })
+})
 
 function add(a, b) {
     return a + b;

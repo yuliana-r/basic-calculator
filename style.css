@@ -67,10 +67,6 @@ button:hover {
     filter: brightness(105%);
 }
 
-button:focus {
-    border: 1px solid #fff;
-}
-
 .container {
     height: 100%;
     justify-content: center;
