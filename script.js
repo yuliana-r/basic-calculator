@@ -59,6 +59,7 @@ operatorBtn.forEach(button => {
             display.textContent = CURRENT_NUMBER;
         }
         operatorClicked = false;
+        CURRENT_OPERATOR = button.getAttribute('data-value');
     })
 })
 
@@ -126,6 +127,13 @@ function checkDisplay() {
 
 function updateResult() {
     RESULT = operate(+CURRENT_NUMBER, +OPERAND, CURRENT_OPERATOR);
+
+    if (OPERAND === 0 && CURRENT_OPERATOR === '/') {
+        allClear();
+        display.textContent = "No can do";
+        return;
+    }
+
     CURRENT_NUMBER = +RESULT;
     CURRENT_NUMBER = Math.round(CURRENT_NUMBER * 100) / 100;
 
