@@ -28,8 +28,8 @@ numberBtn.forEach(button => {
         }
 
         if (display.textContent == CURRENT_NUMBER || display.textContent == 0 ||
-            display.textContent == "NaN" || display.textContent == "Yikes"
-            || display.textContent == "Just sum!") {
+            display.textContent == "NaN" || display.textContent == "Yikes" ||
+            display.textContent == ":)") {
             clearDisplay();
             display.textContent = (display.textContent + button.getAttribute('data-value')).substring(0, 11);
 
@@ -46,7 +46,8 @@ operatorBtn.forEach(button => {
 
         if (!operatorClicked) {
 
-        } else if (CURRENT_NUMBER !== undefined && OPERAND === undefined && CURRENT_OPERATOR !== undefined) {
+        } else if (CURRENT_NUMBER !== undefined &&
+            OPERAND === undefined && CURRENT_OPERATOR !== undefined) {
             assignOperand();
             clearDisplay();
             updateResult();
@@ -123,6 +124,7 @@ function operate(a, b, operator) {
 }
 
 function updateResult() {
+    
     RESULT = operate(+CURRENT_NUMBER, +OPERAND, CURRENT_OPERATOR);
 
     if (OPERAND === 0 && CURRENT_OPERATOR === '/') {
