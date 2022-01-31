@@ -27,8 +27,9 @@ numberBtn.forEach(button => {
             return;
         }
 
-        if (display.textContent == CURRENT_NUMBER || display.textContent == 0 || checkDisplay() ||
-            !display.textContent.includes('.')) {
+        if (display.textContent == CURRENT_NUMBER || display.textContent == 0 ||
+            display.textContent == "NaN" || display.textContent == "Yikes"
+            || display.textContent == "Just sum!") {
             clearDisplay();
             display.textContent = (display.textContent + button.getAttribute('data-value')).substring(0, 11);
 
@@ -119,10 +120,6 @@ function operate(a, b, operator) {
         case "/":
             return divide(a, b);
     }
-}
-
-function checkDisplay() {
-    return !display.textContent.includes('.');
 }
 
 function updateResult() {
