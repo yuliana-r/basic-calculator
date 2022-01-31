@@ -3,6 +3,7 @@ let CURRENT_OPERATOR;
 let OPERAND;
 let RESULT;
 let decimalCount = 0;
+let operatorClicked = true;
 
 const display = document.getElementById('display');
 const clearBtn = document.getElementById('clear');
@@ -15,6 +16,8 @@ const backspaceBtn = document.getElementById('delete');
 
 numberBtn.forEach(button => {
     button.addEventListener('click', () => {
+
+        operatorClicked = true;
 
         if (button.getAttribute('data-value') === '.') {
             decimalCount++;
@@ -40,7 +43,9 @@ operatorBtn.forEach(button => {
 
         decimalCount = 0;
 
-        if (CURRENT_NUMBER !== undefined && OPERAND === undefined && CURRENT_OPERATOR !== undefined) {
+        if (!operatorClicked) {
+
+        } else if (CURRENT_NUMBER !== undefined && OPERAND === undefined && CURRENT_OPERATOR !== undefined) {
             assignOperand();
             clearDisplay();
             updateResult();
@@ -53,6 +58,7 @@ operatorBtn.forEach(button => {
             CURRENT_OPERATOR = button.getAttribute('data-value');
             display.textContent = CURRENT_NUMBER;
         }
+        operatorClicked = false;
     })
 })
 
@@ -98,7 +104,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    return +(Math.round((a / b) + "e+2") + "e-2");
+        return +(Math.round((a / b) + "e+2") + "e-2");
 }
 
 function operate(a, b, operator) {
