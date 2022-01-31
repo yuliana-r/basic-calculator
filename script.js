@@ -3,7 +3,6 @@ let CURRENT_OPERATOR;
 let OPERAND;
 let RESULT;
 let decimalCount = 0;
-let clickCount = 0;
 
 const display = document.getElementById('display');
 const clearBtn = document.getElementById('clear');
@@ -11,11 +10,8 @@ const numberBtn = document.querySelectorAll('.number');
 const operatorBtn = document.querySelectorAll('.operator');
 const equalsBtn = document.getElementById('equals');
 const decimalBtn = document.getElementById('decimal');
+const backspaceBtn = document.getElementById('delete');
 
-window.addEventListener('keydown', function (e) {
-    const key = document.querySelector(`button[data-key='${e.keyCode}']`);
-    key.click();
-});
 
 numberBtn.forEach(button => {
     button.addEventListener('click', () => {
@@ -28,15 +24,14 @@ numberBtn.forEach(button => {
             return;
         }
 
-            if (display.textContent == CURRENT_NUMBER || display.textContent == 0 || 
-                display.textContent == "Yikes" || display.textContent == "NaN") {
-                clearDisplay();
-                display.textContent = (display.textContent + button.getAttribute('data-value')).substring(0, 11);
-            } else {
-                display.textContent = (display.textContent + button.getAttribute('data-value')).substring(0, 11);
-            }
+        if (display.textContent == CURRENT_NUMBER || display.textContent == 0 ||
+            !checkDisplay()) {
+            clearDisplay();
+            display.textContent = (display.textContent + button.getAttribute('data-value')).substring(0, 11);
 
-            
+        } else {
+            display.textContent = (display.textContent + button.getAttribute('data-value')).substring(0, 11);
+        }
     })
 })
 
@@ -52,25 +47,43 @@ operatorBtn.forEach(button => {
             CURRENT_OPERATOR = button.getAttribute('data-value');
             OPERAND = undefined;
 
-
-            console.log(`if #1`);
-            console.log(`current number: ${CURRENT_NUMBER}`);
-            console.log(`current operator: ${CURRENT_OPERATOR}`);
-            console.log(`current operand: ${OPERAND}`);
-
         } else if (CURRENT_OPERATOR === undefined &&
             (CURRENT_NUMBER === undefined || CURRENT_NUMBER !== undefined && OPERAND === undefined)) {
             CURRENT_NUMBER = +display.textContent;
             CURRENT_OPERATOR = button.getAttribute('data-value');
             display.textContent = CURRENT_NUMBER;
-
-            console.log(`if #2`);
-            console.log(`current number: ${CURRENT_NUMBER}`);
-            console.log(`current operator: ${CURRENT_OPERATOR}`);
-            console.log(`current operand: ${OPERAND}`);
         }
     })
 })
+
+clearBtn.addEventListener('click', () => {
+    allClear();
+});
+
+equalsBtn.addEventListener('click', () => {
+
+    if (CURRENT_NUMBER !== undefined && OPERAND === undefined && CURRENT_OPERATOR !== undefined) {
+        assignOperand();
+        clearDisplay()
+        updateResult();
+        CURRENT_OPERATOR = undefined;
+        OPERAND = undefined;
+    } else {
+        display.textContent = 'Yikes';
+    }
+});
+
+backspaceBtn.addEventListener('click', () => {
+    display.textContent = display.textContent.slice(0, -1);
+    if (!display.textContent.includes('.')) {
+        decimalCount = 0;
+    }
+})
+
+window.addEventListener('keydown', function (e) {
+    const key = document.querySelector(`button[data-key='${e.keyCode}']`);
+    key.click();
+});
 
 function add(a, b) {
     return a + b;
@@ -101,6 +114,10 @@ function operate(a, b, operator) {
     }
 }
 
+function checkDisplay() {
+    return /\d/.test(display.textContent);
+}
+
 function updateResult() {
     RESULT = operate(+CURRENT_NUMBER, +OPERAND, CURRENT_OPERATOR);
     CURRENT_NUMBER = +RESULT;
@@ -128,24 +145,3 @@ function allClear() {
     OPERAND = undefined;
     decimalCount = 0;
 }
-
-clearBtn.addEventListener('click', () => {
-    allClear();
-});
-
-equalsBtn.addEventListener('click', () => {
-
-    if (CURRENT_NUMBER !== undefined && OPERAND === undefined && CURRENT_OPERATOR !== undefined) {
-        assignOperand();
-        clearDisplay()
-        updateResult();
-
-        CURRENT_OPERATOR = undefined;
-        OPERAND = undefined;
-
-        console.log(`equals`);
-        console.log(`current number: ${CURRENT_NUMBER}`);
-        console.log(`current operator: ${CURRENT_OPERATOR}`);
-        console.log(`current operand: ${OPERAND}`);
-    }
-});
