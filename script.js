@@ -105,7 +105,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-        return +(Math.round((a / b) + "e+2") + "e-2");
+    return +(Math.round((a / b) + "e+2") + "e-2");
 }
 
 function operate(a, b, operator) {
