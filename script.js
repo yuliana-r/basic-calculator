@@ -27,8 +27,8 @@ numberBtn.forEach(button => {
             return;
         }
 
-        if (display.textContent == CURRENT_NUMBER || display.textContent == 0 ||
-            !checkDisplay()) {
+        if (display.textContent == CURRENT_NUMBER || display.textContent == 0 || checkDisplay() ||
+            !display.textContent.includes('.')) {
             clearDisplay();
             display.textContent = (display.textContent + button.getAttribute('data-value')).substring(0, 11);
 
@@ -122,7 +122,7 @@ function operate(a, b, operator) {
 }
 
 function checkDisplay() {
-    return /\d/.test(display.textContent);
+    return !display.textContent.includes('.');
 }
 
 function updateResult() {
