@@ -2,146 +2,73 @@ let CURRENT_NUMBER;
 let CURRENT_OPERATOR;
 let OPERAND;
 let RESULT;
-let operatorIsPressed = false;
+let decimalCount = 0;
+let clickCount = 0;
 
 const display = document.getElementById('display');
 const clearBtn = document.getElementById('clear');
 const numberBtn = document.querySelectorAll('.number');
 const operatorBtn = document.querySelectorAll('.operator');
+const equalsBtn = document.getElementById('equals');
+const decimalBtn = document.getElementById('decimal');
 
-clearBtn.addEventListener('click', () => {
-    clearDisplay();
-});
-
-const equals = document.getElementById('equals');
-equals.addEventListener('click', () => {
-
-    if (CURRENT_NUMBER !== undefined && OPERAND === undefined && CURRENT_OPERATOR !== undefined) {
-
-        OPERAND = +display.textContent;
-        display.textContent = '';
-
-        // RESULT = operate(+CURRENT_NUMBER, +OPERAND, CURRENT_OPERATOR);
-        // CURRENT_NUMBER = +RESULT;
-        // display.textContent = CURRENT_NUMBER;
-
-        updateResult();
-        
-        CURRENT_OPERATOR = undefined;
-        OPERAND = undefined;
-
-        console.log(`equals`);
-        console.log(`current number: ${CURRENT_NUMBER}`);
-        console.log(`current operator: ${CURRENT_OPERATOR}`);
-        console.log(`current operand: ${OPERAND}`);
-    }
+window.addEventListener('keydown', function (e) {
+    const key = document.querySelector(`button[data-key='${e.keyCode}']`);
+    key.click();
 });
 
 numberBtn.forEach(button => {
     button.addEventListener('click', () => {
-        if (display.textContent == CURRENT_NUMBER || display.textContent == OPERAND) {
-            display.textContent = '';
-            display.textContent = (display.textContent + button.getAttribute('data-value')).substring(0, 11);
-        } else {
-            display.textContent = (display.textContent + button.getAttribute('data-value')).substring(0, 11);
+
+        if (button.getAttribute('data-value') === '.') {
+            decimalCount++;
         }
+
+        if (button.getAttribute('data-value') === '.' && decimalCount > 1) {
+            return;
+        }
+
+            if (display.textContent == CURRENT_NUMBER || display.textContent == 0 || 
+                display.textContent == "Yikes" || display.textContent == "NaN") {
+                clearDisplay();
+                display.textContent = (display.textContent + button.getAttribute('data-value')).substring(0, 11);
+            } else {
+                display.textContent = (display.textContent + button.getAttribute('data-value')).substring(0, 11);
+            }
+
+            
     })
 })
-
-// operatorBtn.forEach(button => {
-//     button.addEventListener('click', () => {
-
-//         if (OPERAND !== undefined && CURRENT_OPERATOR !== undefined) {
-
-//             RESULT = operate(+CURRENT_NUMBER, +OPERAND, CURRENT_OPERATOR);
-//             CURRENT_NUMBER = +RESULT;
-//             display.textContent = CURRENT_NUMBER;
-//             OPERAND = undefined;
-//             CURRENT_OPERATOR = undefined;
-
-
-//         } else if (CURRENT_NUMBER !== undefined && OPERAND === undefined && CURRENT_OPERATOR !== undefined) {
-//             OPERAND = +display.textContent;
-//             display.textContent = '';
-//             RESULT = operate(+CURRENT_NUMBER, +OPERAND, CURRENT_OPERATOR);
-//             CURRENT_NUMBER = +RESULT;
-//             display.textContent = CURRENT_NUMBER;
-//             CURRENT_OPERATOR = button.getAttribute('data-value');
-//             OPERAND = undefined;
-
-//         } else {
-
-//             CURRENT_NUMBER = +display.textContent;
-//             CURRENT_OPERATOR = button.getAttribute('data-value');
-//             display.textContent = '';
-//         }
-//     })
-// })
-
 
 operatorBtn.forEach(button => {
     button.addEventListener('click', () => {
 
+        decimalCount = 0;
 
-            // if (OPERAND !== undefined && CURRENT_OPERATOR !== undefined) {
-
-            //     // RESULT = operate(+CURRENT_NUMBER, +OPERAND, CURRENT_OPERATOR);
-            //     // CURRENT_NUMBER = +RESULT;
-            //     // display.textContent = CURRENT_NUMBER;
-
-            //     updateResult();
-
-            //     OPERAND = undefined;
-            //     CURRENT_OPERATOR = undefined;
-                
+        if (CURRENT_NUMBER !== undefined && OPERAND === undefined && CURRENT_OPERATOR !== undefined) {
+            assignOperand();
+            clearDisplay();
+            updateResult();
+            CURRENT_OPERATOR = button.getAttribute('data-value');
+            OPERAND = undefined;
 
 
-            //     console.log(`if #1`);
-            //     console.log(`current number: ${CURRENT_NUMBER}`);
-            //     console.log(`current operator: ${CURRENT_OPERATOR}`);
-            //     console.log(`current operand: ${OPERAND}`);
+            console.log(`if #1`);
+            console.log(`current number: ${CURRENT_NUMBER}`);
+            console.log(`current operator: ${CURRENT_OPERATOR}`);
+            console.log(`current operand: ${OPERAND}`);
 
-            // } else 
-            if (CURRENT_NUMBER !== undefined && OPERAND === undefined && CURRENT_OPERATOR !== undefined) {
-                OPERAND = +display.textContent;
-                display.textContent = '';
+        } else if (CURRENT_OPERATOR === undefined &&
+            (CURRENT_NUMBER === undefined || CURRENT_NUMBER !== undefined && OPERAND === undefined)) {
+            CURRENT_NUMBER = +display.textContent;
+            CURRENT_OPERATOR = button.getAttribute('data-value');
+            display.textContent = CURRENT_NUMBER;
 
-                // RESULT = operate(+CURRENT_NUMBER, +OPERAND, CURRENT_OPERATOR);
-                // CURRENT_NUMBER = +RESULT;
-                // display.textContent = CURRENT_NUMBER;
-
-                updateResult();
-
-                CURRENT_OPERATOR = button.getAttribute('data-value');
-                OPERAND = undefined;
-
-                console.log(`if #2`);
-                console.log(`current number: ${CURRENT_NUMBER}`);
-                console.log(`current operator: ${CURRENT_OPERATOR}`);
-                console.log(`current operand: ${OPERAND}`);
-
-            } else if (CURRENT_NUMBER === undefined && CURRENT_OPERATOR === undefined) {
-                CURRENT_NUMBER = +display.textContent;
-                CURRENT_OPERATOR = button.getAttribute('data-value');
-                display.textContent = CURRENT_NUMBER;
-
-                console.log(`if #3`);
-                console.log(`current number: ${CURRENT_NUMBER}`);
-                console.log(`current operator: ${CURRENT_OPERATOR}`);
-                console.log(`current operand: ${OPERAND}`);
-
-            } else if (CURRENT_NUMBER !== undefined && CURRENT_OPERATOR === undefined && OPERAND === undefined) {
-                CURRENT_NUMBER = +display.textContent;
-                CURRENT_OPERATOR = button.getAttribute('data-value');
-                display.textContent = CURRENT_NUMBER;
-
-                console.log(`if #4`);
-                console.log(`current number: ${CURRENT_NUMBER}`);
-                console.log(`current operator: ${CURRENT_OPERATOR}`);
-                console.log(`current operand: ${OPERAND}`);
-
-            }
-        
+            console.log(`if #2`);
+            console.log(`current number: ${CURRENT_NUMBER}`);
+            console.log(`current operator: ${CURRENT_OPERATOR}`);
+            console.log(`current operand: ${OPERAND}`);
+        }
     })
 })
 
@@ -177,12 +104,48 @@ function operate(a, b, operator) {
 function updateResult() {
     RESULT = operate(+CURRENT_NUMBER, +OPERAND, CURRENT_OPERATOR);
     CURRENT_NUMBER = +RESULT;
-    display.textContent = CURRENT_NUMBER;
+    CURRENT_NUMBER = Math.round(CURRENT_NUMBER * 100) / 100;
+
+    if (CURRENT_NUMBER.toString().length > 10) {
+        display.textContent = CURRENT_NUMBER.toExponential(4);
+    } else {
+        display.textContent = CURRENT_NUMBER;
+    }
+}
+
+function assignOperand() {
+    OPERAND = +display.textContent;
 }
 
 function clearDisplay() {
     display.textContent = '';
+}
+
+function allClear() {
+    display.textContent = '';
     CURRENT_NUMBER = undefined;
     CURRENT_OPERATOR = undefined;
     OPERAND = undefined;
+    decimalCount = 0;
 }
+
+clearBtn.addEventListener('click', () => {
+    allClear();
+});
+
+equalsBtn.addEventListener('click', () => {
+
+    if (CURRENT_NUMBER !== undefined && OPERAND === undefined && CURRENT_OPERATOR !== undefined) {
+        assignOperand();
+        clearDisplay()
+        updateResult();
+
+        CURRENT_OPERATOR = undefined;
+        OPERAND = undefined;
+
+        console.log(`equals`);
+        console.log(`current number: ${CURRENT_NUMBER}`);
+        console.log(`current operator: ${CURRENT_OPERATOR}`);
+        console.log(`current operand: ${OPERAND}`);
+    }
+});
