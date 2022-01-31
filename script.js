@@ -29,10 +29,9 @@ numberBtn.forEach(button => {
 
         if (display.textContent == CURRENT_NUMBER || display.textContent == 0 ||
             display.textContent == "NaN" || display.textContent == "Yikes" ||
-            display.textContent == ":)") {
+            display.textContent == ":)" || display.textContent == "No can do") {
             clearDisplay();
             display.textContent = (display.textContent + button.getAttribute('data-value')).substring(0, 11);
-
         } else {
             display.textContent = (display.textContent + button.getAttribute('data-value')).substring(0, 11);
         }
