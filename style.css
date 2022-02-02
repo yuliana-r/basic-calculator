@@ -51,6 +51,8 @@ a:hover {
 }
 
 button {
+    justify-content: center;
+    align-items: center;
     width: 60px;
     height: 60px;
     border-style: none;
