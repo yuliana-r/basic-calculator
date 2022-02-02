@@ -29,7 +29,8 @@ numberBtn.forEach(button => {
 
         if (display.textContent == CURRENT_NUMBER || display.textContent == 0 ||
             display.textContent == "NaN" || display.textContent == "Yikes" ||
-            display.textContent == ":)" || display.textContent == "No can do") {
+            display.textContent == ":)" || display.textContent == "No can do" ||
+            display.textContent.includes("e")) {
             clearDisplay();
             display.textContent = (display.textContent + button.getAttribute('data-value')).substring(0, 11);
         } else {
@@ -42,6 +43,11 @@ operatorBtn.forEach(button => {
     button.addEventListener('click', () => {
 
         decimalCount = 0;
+
+        if (display.textContent == 'NaN' || display.textContent == 'Yikes' ||
+            display.textContent == 'No can do') {
+            allClear();
+        }
 
         if (!operatorClicked) {
 
@@ -123,7 +129,7 @@ function operate(a, b, operator) {
 }
 
 function updateResult() {
-    
+
     RESULT = operate(+CURRENT_NUMBER, +OPERAND, CURRENT_OPERATOR);
 
     if (OPERAND === 0 && CURRENT_OPERATOR === '/') {
