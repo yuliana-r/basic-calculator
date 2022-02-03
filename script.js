@@ -88,10 +88,19 @@ equalsBtn.addEventListener('click', () => {
 });
 
 backspaceBtn.addEventListener('click', () => {
+
+    if(display.textContent == 'No can do' || display.textContent == 'Yikes' ||
+    display.textContent == 'NaN') {
+        allClear();
+        return;
+    }
+
     display.textContent = display.textContent.slice(0, -1);
     if (!display.textContent.includes('.')) {
         decimalCount = 0;
     }
+
+    
 })
 
 window.addEventListener('keydown', function (e) {
