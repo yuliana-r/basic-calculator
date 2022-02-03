@@ -90,8 +90,8 @@ equalsBtn.addEventListener('click', () => {
 backspaceBtn.addEventListener('click', () => {
 
     if(display.textContent == 'No can do' || display.textContent == 'Yikes' ||
-    display.textContent == 'NaN') {
-        allClear();
+    display.textContent == 'NaN' || display.textContent == ':)') {
+        allClear(); 
         return;
     }
 
