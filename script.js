@@ -45,7 +45,7 @@ operatorBtn.forEach(button => {
         decimalCount = 0;
 
         if (display.textContent == 'NaN' || display.textContent == 'Yikes' ||
-            display.textContent == 'No can do') {
+            display.textContent == 'No can do' || display.textContent == ':)') {
             allClear();
         }
 
