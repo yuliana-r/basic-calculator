@@ -39,11 +39,11 @@ p {
 }
 
 a {
-    text-decoration: none;
-    margin: 1em 0;
-    font-size: 20px;
-    font-family: 'Open Sans', sans-serif;
     color: #4c4e4b;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    margin: 1em 0;
+    text-decoration: none;
 }
 
 a:hover {
@@ -51,19 +51,19 @@ a:hover {
 }
 
 button {
-    justify-content: center;
     align-items: center;
-    width: 60px;
-    height: 60px;
-    border-style: none;
-    margin: 0.5em 0;
-    font-size: 35px;
-    box-sizing: border-box;
-    margin: 0;
-    color: #fff;
-    font-weight: bold;
-    font-family: 'Open Sans', sans-serif;
     border-radius: 3px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 35px;
+    font-weight: bold;
+    height: 60px;
+    justify-content: center;
+    margin: 0.5em 0;
+    margin: 0;
+    width: 60px;
 }
 
 button:hover {
@@ -71,10 +71,10 @@ button:hover {
 }
 
 .container {
-    height: 100%;
-    justify-content: center;
     align-items: center;
     flex: 1;
+    height: 100%;
+    justify-content: center;
 }
 
 .calculator {
@@ -96,8 +96,8 @@ button:hover {
 }
 
 .content {
-    width: 100%;
     justify-content: space-between;
+    width: 100%;
 }
 
 .grey {
@@ -114,11 +114,11 @@ button:hover {
 
 #clear,
 #delete {
+    color: #fff;
+    font-size: 25px;
+    font-weight: bold;
     height: 35px;
     width: 47.60%;
-    font-size: 25px;
-    color: #fff;
-    font-weight: bold;
 }
 
 #display {
